@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CraftStory AI - Empowering Artisans</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo { color: #333; font-size: 1.8rem; font-weight: bold; }
+        
+        .nav { display: flex; gap: 2rem; }
+        .nav a { 
+            color: #333; text-decoration: none; font-weight: 500; 
+            cursor: pointer; transition: color 0.3s;
+        }
+        .nav a:hover { color: #667eea; }
+        
+        .container { 
+            max-width: 1200px; margin: 0 auto; padding: 2rem; 
+            display: none;
+        }
+        .container.active { display: block; }
+        
+        .hero {
+            text-align: center; color: white; margin-bottom: 4rem;
+        }
+        .hero h2 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        
+        .btn {
+            padding: 1rem 2rem; border-radius: 50px; text-decoration: none;
+            font-weight: bold; transition: transform 0.3s; cursor: pointer;
+            border: none; font-size: 1rem;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn.primary { background: #ff6b6b; color: white; }
+        .btn.secondary { background: white; color: #333; }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333; padding: 2rem; border-radius: 15px;
+            backdrop-filter: blur(10px); margin-bottom: 2rem;
+        }
+        
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 0.8rem; border: 2px solid #ddd;
+            border-radius: 8px; font-size: 1rem;
+        }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
+        .product-card {
+            background: white; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s;
+        }
+        .product-card:hover { transform: translateY(-5px); }
+        
+        .product-image {
+            height: 200px; background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            display: flex; align-items: center; justify-content: center; font-size: 3rem;
+        }
+        
+        .product-info { padding: 1.5rem; }
+        .product-price { font-size: 1.5rem; font-weight: bold; color: #ff6b6b; }
+        
+        .ai-story {
+            background: #f8f9fa; padding: 1rem; border-radius: 10px;
+            margin-top: 1rem; border-left: 4px solid #ff6b6b;
+        }
+        
+        .loading { text-align: center; color: #667eea; font-size: 1.2rem; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <h1 class="logo">🎨 CraftStory AI</h1>
+            <nav class="nav">
+                <a onclick="showPage('home')">Home</a>
+                <a onclick="showPage('marketplace')">Marketplace</a>
+                <a onclick="showPage('dashboard')">Artisan Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="container active">
+        <div class="hero">
+            <h2>Empowering Local Artisans Through AI</h2>
+            <p>Bridge traditional craftsmanship with modern digital audiences</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                <button class="btn primary" onclick="showPage('dashboard')">Join as Artisan</button>
+                <button class="btn secondary" onclick="showPage('marketplace')">Explore Crafts</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="grid">
+                <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border-radius: 15px;">
+                    <h3>🤖 AI Story Generation</h3>
+                    <p>Automatically create compelling narratives about your craft and heritage</p>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border-radius: 15px;">
+                    <h3>📸 Smart Product Showcase</h3>
+                    <p>AI-enhanced photography and 360° product visualization</p>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border-radius: 15px;">
+                    <h3>🌐 Multi-language Support</h3>
+                    <p>Real-time translation preserving cultural context</p>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; border-radius: 15px;">
+                    <h3>📊 Business Intelligence</h3>
+                    <p>AI-powered insights for pricing and market trends</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Artisan Dashboard -->
+    <div id="dashboard" class="container">
+        <h2 style="color: white; margin-bottom: 2rem;">🎨 Artisan Dashboard</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>📝 Artisan Profile</h3>
+                <form id="artisanForm">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Craft Specialization</label>
+                        <select id="craft" required>
+                            <option value="">Select your craft</option>
+                            <option value="Pottery">Pottery</option>
+                            <option value="Weaving">Weaving</option>
+                            <option value="Jewelry Making">Jewelry Making</option>
+                            <option value="Wood Carving">Wood Carving</option>
+                            <option value="Embroidery">Embroidery</option>
+                            <option value="Painting">Painting</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="location" placeholder="e.g., Varanasi, Uttar Pradesh" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Years of Experience</label>
+                        <input type="number" id="experience" placeholder="Years" required>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>🤖 AI Story Generator</h3>
+                <p>Generate compelling stories about your craft and heritage using AI</p>
+                
+                <button class="btn primary" onclick="generateStory()" style="width: 100%; margin-top: 1rem;">
+                    ✨ Generate My Story
+                </button>
+                
+                <div id="loadingStory" class="loading hidden">🔄 Generating your story...</div>
+                
+                <div id="storyResult" class="ai-story hidden">
+                    <h4>📖 Your Biography</h4>
+                    <p id="biography"></p>
+                    
+                    <h4 style="margin-top: 1rem;">🏺 Product Description</h4>
+                    <p id="productDescription"></p>
+                    
+                    <h4 style="margin-top: 1rem;">🏛️ Cultural Context</h4>
+                    <p id="culturalContext"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Marketplace -->
+    <div id="marketplace" class="container">
+        <div class="card">
+            <h2 style="text-align: center; margin-bottom: 2rem;">🛍️ Artisan Marketplace</h2>
+            
+            <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                <input type="text" id="searchInput" placeholder="🔍 Search crafts, artisans..." 
+                       style="flex: 1; min-width: 200px; padding: 0.8rem; border-radius: 25px; border: 2px solid #ddd;">
+            </div>
+        </div>
+
+        <div id="productGrid" class="grid">
+            <!-- Products will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.container').forEach(container => {
+                container.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            if (pageId === 'marketplace') {
+                loadProducts();
+            }
+        }
+
+        // Generate AI Story (Demo Version)
+        async function generateStory() {
+            const name = document.getElementById('name').value;
+            const craft = document.getElementById('craft').value;
+            const location = document.getElementById('location').value;
+            const experience = document.getElementById('experience').value;
+
+            if (!name || !craft || !location || !experience) {
+                alert('Please fill in all fields first');
+                return;
+            }
+
+            document.getElementById('loadingStory').classList.remove('hidden');
+            document.getElementById('storyResult').classList.add('hidden');
+
+            // Simulate AI processing delay
+            setTimeout(() => {
+                // Mock AI-generated story
+                const story = {
+                    biography: `Meet ${name}, a master ${craft} artisan from ${location}. With ${experience} years of dedication, ${name} carries forward the ancient traditions passed down through generations. Each piece tells a story of cultural heritage and skilled craftsmanship that connects the past with the present.`,
+                    productDescription: `Handcrafted ${craft} piece showcasing traditional techniques from ${location}. This authentic creation represents hours of meticulous work and generations of inherited skill, making each piece unique and culturally significant.`,
+                    culturalContext: `The art of ${craft} in ${location} dates back centuries, representing the rich cultural tapestry of Indian craftsmanship. This traditional craft has been preserved through generations, maintaining its authenticity while adapting to modern aesthetics.`
+                };
+                
+                document.getElementById('biography').textContent = story.biography;
+                document.getElementById('productDescription').textContent = story.productDescription;
+                document.getElementById('culturalContext').textContent = story.culturalContext;
+                
+                document.getElementById('storyResult').classList.remove('hidden');
+                document.getElementById('loadingStory').classList.add('hidden');
+            }, 2000);
+        }
+
+        // Load Products (Demo Version)
+        async function loadProducts() {
+            // Mock products data for demo
+            const mockProducts = [
+                {
+                    id: 1,
+                    name: "Handwoven Banarasi Silk Saree",
+                    price: 25000,
+                    category: "Textiles",
+                    artisan: "Kamala Devi",
+                    location: "Varanasi",
+                    rating: 4.9
+                },
+                {
+                    id: 2,
+                    name: "Traditional Pottery Vase",
+                    price: 3500,
+                    category: "Pottery",
+                    artisan: "Ravi Kumar",
+                    location: "Khurja",
+                    rating: 4.7
+                },
+                {
+                    id: 3,
+                    name: "Silver Filigree Jewelry",
+                    price: 8500,
+                    category: "Jewelry",
+                    artisan: "Meera Sharma",
+                    location: "Cuttack",
+                    rating: 4.8
+                },
+                {
+                    id: 4,
+                    name: "Madhubani Painting",
+                    price: 5000,
+                    category: "Painting",
+                    artisan: "Sita Devi",
+                    location: "Mithila",
+                    rating: 4.6
+                }
+            ];
+            
+            displayProducts(mockProducts);
+        }
+
+        function displayProducts(products) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        ${product.category === 'Textiles' ? '🧵' : 
+                          product.category === 'Pottery' ? '🏺' : '🎨'}
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p style="color: #666; margin-bottom: 0.5rem;">by ${product.artisan}</p>
+                        <p style="color: #888; font-size: 0.9rem; margin-bottom: 1rem;">📍 ${product.location}</p>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span class="product-price">₹${product.price.toLocaleString()}</span>
+                            <span style="color: #ffa500;">⭐ ${product.rating}</span>
+                        </div>
+                        
+                        <button class="btn primary" style="width: 100%;">🛒 Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
